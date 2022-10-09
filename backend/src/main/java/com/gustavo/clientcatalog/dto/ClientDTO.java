@@ -3,11 +3,6 @@ package com.gustavo.clientcatalog.dto;
 import java.io.Serializable;
 import java.time.Instant;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import com.gustavo.clientcatalog.entities.Client;
 
 public class ClientDTO implements Serializable {

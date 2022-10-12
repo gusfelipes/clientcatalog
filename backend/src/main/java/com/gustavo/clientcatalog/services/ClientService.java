@@ -24,12 +24,24 @@ public class ClientService {
 	@Autowired
 	private ClientRepository repository;
 
+	
+	/**
+	 * Metodo para listar todos os clientes paginados de acordo com filtro
+	 * @param pageRequest
+	 * @return Page ClientDTO 
+	 */
 	@Transactional(readOnly = true)
 	public Page<ClientDTO> findAllPaged(PageRequest pageRequest) {
 		Page<Client> list = repository.findAll(pageRequest);
 		return list.map(entity -> new ClientDTO(entity));
 	}
 
+	/**
+	 * Metodo para listar cliente por id
+	 * @param id
+	 * @return ClientDTO
+	 */
+	
 	@Transactional(readOnly = true)
 	public ClientDTO findById(Long id) {
 		Optional<Client> object = repository.findById(id);
@@ -38,6 +50,11 @@ public class ClientService {
 		return new ClientDTO(entity);
 	}
 
+	/**
+	 * Metodo para inserir um cliente
+	 * @param dto
+	 * @return ClientDTO
+	 */
 	@Transactional
 	public ClientDTO insert(ClientDTO dto) {
 		Client entity = new Client();
@@ -46,6 +63,12 @@ public class ClientService {
 		return new ClientDTO(entity);
 	}
 
+	/**
+	 * Metodo para atualizar um cliente
+	 * @param id 
+	 * @param dto
+	 * @return ClientDTO
+	 */
 	@Transactional
 	public ClientDTO update(Long id, ClientDTO dto) {
 		try {
@@ -60,6 +83,10 @@ public class ClientService {
 		}
 	}
 
+	/**
+	 * Metodo para deletar um cliente
+	 * @param id
+	 */
 	public void delete(Long id) {
 		try {
 			repository.deleteById(id);
@@ -71,6 +98,12 @@ public class ClientService {
 		}
 	}
 
+	
+	/**
+	 * Metodo privado para transformar de um DTO para uma Entidade
+	 * @param dto
+	 * @param entity
+	 */
 	private void copyDTOToEntity(ClientDTO dto, Client entity) {
 		entity.setName(dto.getName());
 		entity.setCpf(dto.getCpf());
